@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hotel · Demo</title>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Google Sans',Roboto,Arial,sans-serif;color:#202124;background:#f7f8fb;}
+  a{color:#1a73e8;text-decoration:none;}
+  .top{background:#fff;border-bottom:1px solid #e8eaed;padding:14px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .top .site{font-weight:700;font-size:17px;}
+  .top .dem{font-size:12px;color:#80868b;background:#f1f3f4;border-radius:12px;padding:3px 10px;}
+  .top .back{margin-left:auto;font-size:13px;}
+  .main{display:flex;gap:18px;padding:20px 24px 30px;flex-wrap:wrap;}
+  .col{flex:1;min-width:320px;background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:18px;}
+  .col h2{font-size:16px;font-weight:600;margin:0 0 14px;}
+  .rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;}
+  .room{border:1px solid #e8eaed;border-radius:12px;padding:14px;position:relative;}
+  .room .no{font-size:12px;color:#80868b;}
+  .room .nm{font-weight:600;margin:2px 0 4px;}
+  .room .feat{font-size:12px;color:#5f6368;margin-bottom:8px;}
+  .room .pr{font-size:16px;font-weight:600;color:#1a73e8;margin-bottom:8px;}
+  .room .st{display:inline-block;border-radius:10px;padding:3px 10px;font-size:11.5px;font-weight:600;}
+  .st.lib{background:#e6f4ea;color:#188038;}
+  .st.ocu{background:#fce8e6;color:#c5221f;}
+  .st.lim{background:#fef7e0;color:#b06000;}
+  label{display:block;font-size:13px;color:#3c4043;margin:10px 0 5px;font-weight:500;}
+  input,select{width:100%;padding:9px 11px;border:1px solid #dadce0;border-radius:8px;font:400 14px 'Google Sans',Roboto,sans-serif;}
+  input:focus,select:focus{outline:none;border-color:#1a73e8;box-shadow:0 0 0 1px #1a73e8 inset;}
+  .btn{width:100%;margin-top:16px;padding:11px;border:none;border-radius:20px;background:#1a73e8;color:#fff;font:500 14px 'Google Sans',Roboto,sans-serif;cursor:pointer;}
+  .btn:hover{background:#1765cc;}
+  .btn:disabled{background:#dadce0;cursor:not-allowed;}
+  .msg{background:#e6f4ea;color:#188038;border-radius:10px;padding:10px 12px;font-size:13.5px;display:none;margin-top:14px;}
+  .summary{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+  .summary span{background:#f1f3f4;border-radius:12px;padding:6px 12px;font-size:12.5px;color:#3c4043;}
+  .summary b{color:#202124;}
+  .foot{text-align:center;padding:18px 16px;color:#80868b;font-size:12.5px;}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="site">Hotel Miradores del Valle</div>
+  <span class="dem">Demo del portafolio</span>
+  <a class="back" href="index.html">&larr; Volver al portafolio</a>
+</div>
+
+<div class="main">
+  <div class="col">
+    <h2>Habitaciones</h2>
+    <div class="rooms" id="rooms"></div>
+  </div>
+
+  <div class="col">
+    <h2>Hacer una reserva</h2>
+    <label for="nombre">Nombre del huésped</label>
+    <input id="nombre" type="text" value="">
+    <label for="tipo">Tipo de habitación</label>
+    <select id="tipo"></select>
+    <label for="fecha1">Entrada</label>
+    <input id="fecha1" type="date">
+    <label for="fecha2">Salida</label>
+    <input id="fecha2" type="date">
+    <div class="pr" id="cost"></div>
+    <button class="btn" id="res">Confirmar reserva</button>
+    <div class="msg" id="msg">Reserva confirmada. ¡Gracias por elegirnos!</div>
+    <div class="summary" id="sum"></div>
+  </div>
+</div>
+
+<div class="foot">Hotel &middot; demo HTML/CSS/JS &middot; parte del portafolio del ingeniero</div>
+
+<script>
+var ROOMS = [
+  {id:1, no:'101', nm:'Estándar', feat:'2 personas · Wi-Fi', pr:280000, est:'lib'},
+  {id:2, no:'102', nm:'Estándar', feat:'2 personas · Wi-Fi', pr:280000, est:'ocu'},
+  {id:3, no:'201', nm:'Familiar', feat:'4 personas · balcón', pr:420000, est:'lib'},
+  {id:4, no:'202', nm:'Familiar', feat:'4 personas · balcón', pr:420000, est:'lim'},
+  {id:5, no:'301', nm:'Suite', feat:'2 personas · jacuzzi · vista', pr:650000, est:'lib'},
+  {id:6, no:'302', nm:'Suite', feat:'2 personas · jacuzzi · vista', pr:650000, est:'lib'}
+];
+var EST = {lib:'Disponible', ocu:'Ocupada', lim:'En limpieza'};
+function fmt(n){ return '$ ' + n.toLocaleString('es-CO'); }
+function disp(hab){
+  var el = document.getElementById('rooms');
+  el.innerHTML = '';
+  ROOMS.forEach(function(r){
+    var d = document.createElement('div');
+    d.className = 'room';
+    d.innerHTML = '<div class="no">Habitación ' + r.no + '</div>' +
+      '<div class="nm">' + r.nm + '</div>' +
+      '<div class="feat">' + r.feat + '</div>' +
+      '<div class="pr">' + fmt(r.pr) + ' / noche</div>' +
+      '<span class="st ' + r.est + '">' + EST[r.est] + '</span>';
+    el.appendChild(d);
+  });
+  var s = document.getElementById('sum');
+  var n = ROOMS.filter(function(r){ return r.est === 'lib'; }).length;
+  s.innerHTML = '<span>Disponibles <b>' + n + '</b></span>' +
+    '<span>Ocupadas <b>' + ROOMS.filter(function(r){ return r.est === 'ocu'; }).length + '</b></span>' +
+    '<span>En limpieza <b>' + ROOMS.filter(function(r){ return r.est === 'lim'; }).length + '</b></span>';
+}
+var selT = document.getElementById('tipo');
+ROOMS.forEach(function(r, i){
+  var o = document.createElement('option');
+  o.value = r.id;
+  o.textContent = r.no + ' · ' + r.nm + ' · ' + fmt(r.pr) + '/noche';
+  selT.appendChild(o);
+});
+function calc(){
+  var r = ROOMS[+selT.value - 1] || ROOMS[0];
+  var a = document.getElementById('fecha1').value;
+  var b = document.getElementById('fecha2').value;
+  document.getElementById('cost').textContent = '';
+  if (a && b && b > a){
+    var dias = Math.round((new Date(b) - new Date(a)) / 86400000);
+    document.getElementById('cost').textContent = 'Total ' + dias + ' noche(s): ' + fmt(r.pr * dias);
+  }
+}
+selT.onchange = calc;
+document.getElementById('fecha1').onchange = calc;
+document.getElementById('fecha2').onchange = calc;
+document.getElementById('res').onclick = function(){
+  var nom = (document.getElementById('nombre').value || '').trim();
+  var r = ROOMS[+selT.value - 1] || ROOMS[0];
+  if (!nom){ alert('Escribe el nombre del huésped.'); return; }
+  if (r.est !== 'lib'){ alert('Esa habitación no está disponible.'); return; }
+  r.est = 'ocu';
+  disp();
+  var m = document.getElementById('msg');
+  m.textContent = 'Reserva confirmada para ' + nom + ' en la habitación ' + r.no + '. ¡Gracias por elegirnos!';
+  m.style.display = 'block';
+  document.getElementById('nombre').value = '';
+  document.getElementById('fecha1').value = '';
+  document.getElementById('fecha2').value = '';
+  document.getElementById('cost').textContent = '';
+  setTimeout(function(){ m.style.display = 'none'; }, 4000);
+};
+disp();
+</script>
+</body>
+</html>
