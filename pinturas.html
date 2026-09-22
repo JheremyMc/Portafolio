@@ -3,151 +3,461 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Local de Pinturas · Demo</title>
+<title>Pinturitas & CIA · Sistema de Punto de Venta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  :root{--ink:#0b1220;--bg:#f5f7fb;--card:#ffffff;--line:#e6eaf2;--acc:#2563eb;--acc2:#1d4ed8;--ok:#16a34a;--warn:#d97706;--bad:#dc2626;--mut:#5b6b82;}
   *{box-sizing:border-box;}
-  body{margin:0;font-family:'Google Sans',Roboto,Arial,sans-serif;color:#202124;background:#f7f8fb;}
-  a{color:#1a73e8;text-decoration:none;}
-  .top{background:#fff;border-bottom:1px solid #e8eaed;padding:14px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .top .site{font-weight:700;font-size:17px;}
-  .top .dem{font-size:12px;color:#80868b;background:#f1f3f4;border-radius:12px;padding:3px 10px;}
-  .top .back{margin-left:auto;font-size:13px;}
-  .bar{display:flex;gap:12px;padding:16px 24px 0;flex-wrap:wrap;align-items:center;}
-  .bar input{flex:1;min-width:200px;border:1px solid #dadce0;border-radius:20px;padding:9px 16px;font:400 14px 'Google Sans',Roboto,sans-serif;}
-  .bar input:focus{outline:none;border-color:#1a73e8;box-shadow:0 0 0 1px #1a73e8 inset;}
-  .bar button{border:1px solid #dadce0;background:#fff;color:#3c4043;border-radius:16px;padding:7px 14px;font:500 13px 'Google Sans',Roboto,sans-serif;cursor:pointer;}
-  .bar button.on{background:#1a73e8;border-color:#1a73e8;color:#fff;}
-  .main{display:flex;gap:18px;padding:16px 24px 30px;flex-wrap:wrap;}
-  .col{flex:1;min-width:300px;background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:18px;}
-  .col h2{font-size:16px;font-weight:600;margin:0 0 14px;}
-  .prod{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
-  .p{border:1px solid #e8eaed;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;}
-  .p .sw{height:54px;border-radius:10px;border:1px solid #e8eaed;}
-  .p .n{font-weight:600;font-size:14px;}
-  .p .d{color:#5f6368;font-size:12px;}
-  .p .pr{color:#1a73e8;font-weight:600;font-size:15px;}
-  .p button{margin-top:auto;border:none;border-radius:16px;background:#1a73e8;color:#fff;padding:7px;font:500 13px 'Google Sans',Roboto,sans-serif;cursor:pointer;}
-  .p button:hover{background:#1765cc;}
-  .cart-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #eef1f6;font-size:14px;}
-  .cart-row .name{flex:1;}
-  .cart-row button{border:1px solid #dadce0;background:#fff;border-radius:10px;width:24px;height:24px;cursor:pointer;font-weight:700;color:#1a73e8;}
-  .total{margin-top:14px;padding-top:10px;border-top:2px solid #eef1f6;display:flex;justify-content:space-between;font-weight:700;font-size:17px;}
-  .msg{background:#e6f4ea;color:#188038;border-radius:10px;padding:10px 12px;font-size:13.5px;display:none;margin-top:10px;}
-  .var{display:inline-block;border-radius:10px;padding:3px 10px;font-size:11.5px;color:#5f6368;background:#f1f3f4;}
-  .foot{text-align:center;padding:18px 16px;color:#80868b;font-size:12.5px;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);font-size:14.5px;}
+  h1,h2,h3{font-family:'Sora';}
+  .bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;background:var(--card);border-bottom:1px solid var(--line);padding:12px 22px;}
+  .bar .lg{display:flex;align-items:center;gap:9px;font-family:'Sora';font-weight:800;font-size:16px;white-space:nowrap;}
+  .bar .lg i{width:13px;height:13px;border-radius:4px;background:conic-gradient(#2563eb,#7c3aed,#c026d3,#2563eb);}
+  .bar .meta{margin-left:auto;display:flex;gap:16px;align-items:center;font-size:12px;color:var(--mut);}
+  .bar .meta b{color:var(--ink);font-weight:600;}
+  .bar .z{background:#eef2fb;color:var(--acc2);border-radius:10px;padding:6px 12px;font-weight:700;}
+  .bar a{color:var(--acc);text-decoration:none;font-weight:600;border:1px solid var(--line);padding:7px 12px;border-radius:10px;}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:22px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:22px;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;gap:14px;align-items:center;box-shadow:0 4px 18px -12px rgba(16,24,40,.14);}
+  .kpi .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;flex:none;}
+  .kpi span{font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;font-weight:700;}
+  .kpi b{display:block;font-family:'Sora';font-size:20px;margin-top:2px;}
+
+  .layout{display:flex;gap:18px;}
+  .main{flex:1;min-width:0;}
+  .side{width:340px;flex:none;align-self:start;}
+  @media(max-width:980px){.layout{flex-direction:column-reverse;} .side{width:auto;} }
+
+  .tabs{display:flex;gap:8px;margin-bottom:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px;box-shadow:0 4px 18px -12px rgba(16,24,40,.14);}
+  .tabs button{flex:1;border:none;background:transparent;border-radius:11px;padding:11px;font:700 13.5px 'Inter';color:var(--mut);cursor:pointer;display:flex;gap:8px;justify-content:center;align-items:center;}
+  .tabs button.on{background:linear-gradient(120deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 8px 20px -10px rgba(37,99,235,.8);}
+
+  .search{display:flex;gap:10px;margin-bottom:16px;}
+  .search input{flex:1;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px 14px;font:500 14px 'Inter';outline:none;}
+  .search input:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(37,99,235,.12);}
+  .search .cats{display:flex;gap:6px;flex-wrap:wrap;}
+  .search .cats button{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 13px;font:700 12.5px 'Inter';color:var(--mut);cursor:pointer;white-space:nowrap;}
+  .search .cats button.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:14px;}
+  .prod{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;transition:.2s;box-shadow:0 4px 18px -12px rgba(16,24,40,.14);}
+  .prod:hover{transform:translateY(-4px);box-shadow:0 22px 34px -22px rgba(16,24,40,.3);border-color:#c9d4ea;}
+  .prod .ph{height:120px;border-radius:12px;background-size:cover;background-position:center;margin-bottom:12px;position:relative;}
+  .prod .sto{position:absolute;bottom:8px;left:8px;font-size:11px;font-weight:700;padding:5px 9px;border-radius:8px;color:#fff;backdrop-filter:blur(4px);}
+  .prod h3{margin:0 0 5px;font-size:15px;}
+  .prod .d{color:var(--mut);font-size:12.5px;line-height:1.45;min-height:34px;}
+  .prod .row{display:flex;justify-content:space-between;align-items:flex-end;margin-top:10px;gap:8px;}
+  .prod .row b{font-family:'Sora';font-size:17px;color:var(--acc2);}
+  .prod .add{border:none;background:var(--ink);color:#fff;border-radius:10px;width:36px;height:36px;font-size:18px;cursor:pointer;font-weight:800;}
+  .prod .add:hover{background:var(--acc);}
+  .tag{display:inline-block;background:#eef2fb;color:var(--acc2);border-radius:8px;font-size:11px;font-weight:700;padding:3px 8px;margin-bottom:8px;}
+
+  .side .cart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 4px 18px -12px rgba(16,24,40,.14);}
+  .side h3{font-size:16px;margin:0 0 4px;display:flex;justify-content:space-between;align-items:center;}
+  .side .emp{color:var(--mut);font-size:13px;text-align:center;padding:26px 8px;line-height:1.6;border:1.5px dashed #dde3ef;border-radius:14px;margin-top:8px;}
+  .ci{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);align-items:center;}
+  .ci .n{flex:1;min-width:0;}
+  .ci .n b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ci .n span{font-size:11.5px;color:var(--mut);}
+  .ci .q{display:flex;align-items:center;gap:8px;}
+  .ci .q button{border:1px solid var(--line);background:#fff;width:24px;height:24px;border-radius:7px;font-size:13px;cursor:pointer;font-weight:700;line-height:1;}
+  .ci .p{font-family:'Sora';font-weight:700;font-size:13px;white-space:nowrap;}
+  .sum{margin-top:12px;font-size:13px;color:var(--mut);}
+  .sum div{display:flex;justify-content:space-between;padding:3px 0;}
+  .sum .gr{border-top:1px solid var(--line);margin-top:8px;padding-top:10px;font-size:15px;color:var(--ink);font-weight:700;}
+  .sum .gr b{font-family:'Sora';}
+
+  .pay{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+  .pay button{border:1.5px solid var(--line);background:#fff;border-radius:11px;padding:10px;font:700 12.5px 'Inter';cursor:pointer;}
+  .pay button.on{border-color:var(--acc);background:#eef4ff;color:var(--acc2);}
+  .chg{display:flex;gap:8px;margin-top:10px;}
+  .chg input{flex:1;border:1px solid var(--line);border-radius:11px;padding:10px 12px;font:600 14px 'Inter';outline:none;}
+  .chg input:focus{border-color:var(--acc);}
+  .go{margin-top:12px;width:100%;border:none;border-radius:12px;background:linear-gradient(120deg,var(--acc),var(--acc2));color:#fff;padding:14px;font:800 15px 'Inter';cursor:pointer;box-shadow:0 10px 22px -10px rgba(37,99,235,.9);}
+  .go:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:13.5px;}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);}
+  th{background:#f8fafd;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--mut);}
+  tr:last-child td{border-bottom:none;}
+  .payb{display:inline-block;border-radius:8px;padding:3px 9px;font-size:11.5px;font-weight:700;}
+  .mE{background:#eef2ff;color:#4338ca} .mT{background:#e0f2fe;color:#0369a1} .mN{background:#d1fae5;color:#047857} .mD{background:#fef3c7;color:#92400e}
+  .del{border:none;background:transparent;color:var(--bad);cursor:pointer;font-size:13px;font-weight:700;}
+  .stok{font-weight:800;font-size:12px;padding:3px 9px;border-radius:8px;}
+  .s-ok{background:#dcfce7;color:var(--ok);} .s-lo{background:#fef3c7;color:var(--warn);} .s-no{background:#fee2e2;color:var(--bad);}
+  .fill{display:none;}
+
+  .modal{position:fixed;inset:0;z-index:60;display:none;align-items:end;justify-content:center;background:rgba(11,18,32,.55);backdrop-filter:blur(4px);}
+  .modal.open{display:flex;}
+  .modal .box{background:#fff;border-radius:22px 22px 0 0;max-width:560px;width:100%;padding:20px 22px 24px;animation:up .3s ease;}
+  @media(min-width:640px){.modal{align-items:center;} .modal .box{border-radius:22px;}}
+  @keyframes up{from{transform:translateY(60px);opacity:.4}to{transform:none;opacity:1}}
+  .modal .ph{height:150px;border-radius:14px;background-size:cover;background-position:center;}
+  .modal h3{font-size:20px;margin:14px 0 4px;}
+  .modal .d{color:var(--mut);line-height:1.65;font-size:14px;margin:0 0 10px;}
+  .modal .f{display:flex;justify-content:space-between;align-items:center;margin-top:14px;}
+  .modal .f b{font-family:'Sora';font-size:22px;color:var(--acc2);}
+  .modal .acts{display:flex;gap:10px;margin-top:12px;}
+  .modal .acts button{flex:1;border:none;border-radius:12px;padding:13px;font:700 14px 'Inter';cursor:pointer;}
+  .modal .x{background:#eef2f6;color:#3c4a5c;}
+  .modal .ok{background:var(--acc);color:#fff;}
+
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:13px 22px;border-radius:14px;font-size:13.5px;font-weight:600;box-shadow:0 16px 36px -16px rgba(0,0,0,.5);transition:.35s;z-index:80;max-width:90vw;text-align:center;}
+  .toast.show{transform:translateX(-50%) translateY(0);}
+
+  .feet{text-align:center;padding:26px;color:var(--mut);font-size:13px;border-top:1px solid var(--line);margin-top:30px;background:var(--card);}
+  .feet a{color:var(--acc);text-decoration:none;font-weight:600;}
 </style>
 </head>
 <body>
 
-<div class="top">
-  <div class="site">Pinturas y Más</div>
-  <span class="dem">Demo del portafolio</span>
-  <a class="back" href="index.html">&larr; Volver al portafolio</a>
-</div>
-
 <div class="bar">
-  <input id="bus" type="text" placeholder="Buscar pintura, color o presentación...">
-  <button class="on" data-t="todos">Todos</button>
-  <button data-t="interior">Interior</button>
-  <button data-t="exterior">Exterior</button>
-  <button data-t="madera">Madera</button>
-</div>
-
-<div class="main">
-  <div class="col">
-    <h2>Catálogo</h2>
-    <div class="prod" id="prod"></div>
-  </div>
-
-  <div class="col">
-    <h2>Carrito</h2>
-    <div id="cart"></div>
-    <div class="total"><span>TOTAL</span><span id="totalv">$ 0</span></div>
-    <button id="pay" class="bar button" style="width:100%;margin-top:12px;background:#188038;border-color:#188038;color:#fff;font-size:14px;padding:10px;">Pagar</button>
-    <div class="msg" id="msg">¡Compra registrada! Recibirás una confirmación por WhatsApp.</div>
+  <div class="lg"><i></i>Pinturitas &amp; CIA</div>
+  <div class="meta">
+    <span><b id="cajaUser">Cajero</b> · Punto <b>1</b></span>
+    <span class="z" id="caja">Caja abierta</span>
+    <a href="index.html">Panel</a>
   </div>
 </div>
 
-<div class="foot">Local de pinturas &middot; demo HTML/CSS/JS &middot; parte del portafolio del ingeniero</div>
+<div class="wrap">
+  <div class="kpis">
+    <div class="kpi"><div class="ic" style="background:#2563eb"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-5 4 3 5-7"/></svg></div><div><span>Ventas hoy</span><b id="kHoy">$ 0</b></div></div>
+    <div class="kpi"><div class="ic" style="background:#7c3aed"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5h16v14"/><path d="M8 15h3M14 11h3"/></svg></div><div><span>Ventas</span><b id="kN">0</b></div></div>
+    <div class="kpi"><div class="ic" style="background:#0891b2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><span>Ticket promedio</span><b id="kProm">$ 0</b></div></div>
+    <div class="kpi"><div class="ic" style="background:#16a34a"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h4l3 12h9l2-7H7"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg></div><div><span>Valor inventario</span><b id="kInv">$ 0</b></div></div>
+  </div>
+
+  <div class="layout">
+    <div class="main">
+      <div class="tabs">
+        <button id="tV" class="on">Vender</button>
+        <button id="tI">Inventario</button>
+        <button id="tH">Historial de ventas</button>
+      </div>
+      <div class="search">
+        <input id="q" placeholder="Buscar producto, código o referencia...">
+        <div class="cats">
+          <button data-c="__all" class="on">Todos</button>
+          <button data-c="Pegante">Pegantes</button>
+          <button data-c="Esmalte">Esmaltes</button>
+          <button data-c="Vinilo">Vinilos</button>
+          <button data-c="Brocha">Brochas</button>
+          <button data-c="Acabado">Acabados</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+
+      <table id="tInv" class="fill">
+        <thead><tr><th>Producto</th><th>Categoría</th><th>Stock</th><th>Costo</th><th>Precio</th><th>Valor inventario</th><th></th></tr></thead>
+        <tbody id="tInvB"></tbody>
+      </table>
+
+      <table id="tHis" class="fill">
+        <thead><tr><th>#</th><th>Hora</th><th>Artículos</th><th>Subtotal</th><th>IVA</th><th>Total</th><th>Pago</th><th></th></tr></thead>
+        <tbody id="tHisB"></tbody>
+      </table>
+    </div>
+
+    <div class="side">
+      <div class="cart">
+        <h3>Venta actual <span id="cnt">0</span></h3>
+        <div id="items"></div>
+        <div class="sum">
+          <div><span>Subtotal</span><b id="sSub">$ 0</b></div>
+          <div><span>IVA (19%)</span><b id="sIva">$ 0</b></div>
+          <div class="gr"><span>Total a pagar</span><b id="sTot">$ 0</b></div>
+        </div>
+        <div class="pay">
+          <button data-p="Efectivo">Efectivo</button>
+          <button data-p="Tarjeta">Tarjeta</button>
+          <button data-p="Nequi">Nequi</button>
+          <button data-p="Daviplata">Daviplata</button>
+        </div>
+        <div class="chg" id="chg">
+          <input id="rec" type="number" min="0" placeholder="Recibido con...">
+          <input id="dev" readonly title="Vuelto">
+        </div>
+        <button class="go" id="go" disabled>Cobrar venta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="mdl"><div class="box" id="mdlB"></div></div>
+<div class="toast" id="toast"></div>
+
+<footer class="feet">Demo contable de punto de venta · Los datos viven solo en tu navegador · <a href="index.html">← Volver al portafolio</a></footer>
 
 <script>
-var PROD = [
-  {n:'Blanco brillante', d:'Vinilo 4L · cubrimiento total', p:82000, t:'interior', c:'#f6f6f4'},
-  {n:'Blanco hielo mate', d:'Vinilo 4L · apta techo', p:78000, t:'interior', c:'#eef0ea'},
-  {n:'Gris perla', d:'Esmalte acrílico 1L · tinturado', p:36000, t:'interior', c:'#c9c9cd'},
-  {n:'Azul profundo', d:'Vinilo 4L · lavable', p:92000, t:'interior', c:'#2e5d8f'},
-  {n:'Verde pradera', d:'Especial exteriores 4L · antifúngica', p:98000, t:'exterior', c:'#5c8351'},
-  {n:'Terracota', d:'Fachada 4L · resistencia UV', p:105000, t:'exterior', c:'#b35d3c'},
-  {n:'Gris piedra', d:'Fachada 4L · resistencia UV', p:100000, t:'exterior', c:'#8a8f98'},
-  {n:'Caoba', d:'Barniz madera 1L · brillo', p:42000, t:'madera', c:'#6b3b26'},
-  {n:'Cedro natural', d:'Protector madera 1L · semi mate', p:40000, t:'madera', c:'#9c6b43'},
-  {n:'Nogal', d:'Verniz 1L · alta duración', p:45000, t:'madera', c:'#4f3422'}
+var pay = 'Efectivo';
+var inv = [
+ {cod:'PI001', n:'Pegante especial 1/8', cat:'Pegante', pr:12000, co:7000,  st:40, d:'Adhesivo para revestimientos con alta resistencia.', se:'p1'},
+ {cod:'PI002', n:'Pegante premium 1/4',  cat:'Pegante', pr:19000, co:11000, st:25, d:'Máxima adhesión para muros con humedad.', se:'p2'},
+ {cod:'ES001', n:'Esmalte blanco 1/4',   cat:'Esmalte', pr:24000, co:15000, st:18, d:'Acabado brillante lavable para interiores.', se:'e1'},
+ {cod:'ES002', n:'Esmalte negro 1/8',    cat:'Esmalte', pr:15000, co:9000,  st:7,  d:'Color profundo para detalles y metal.', se:'e2'},
+ {cod:'ES003', n:'Esmalte oro brillante',cat:'Esmalte', pr:32000, co:20000, st:3,  d:'Acabado metálico de alta gama.', se:'e3'},
+ {cod:'VI001', n:'Vinilo blanco 1/4',    cat:'Vinilo',  pr:22000, co:14000, st:50, d:'Cubrimiento mate premium.', se:'v1'},
+ {cod:'VI002', n:'Vinilo gris perla',    cat:'Vinilo',  pr:26000, co:16000, st:60, d:'Tonos neutros de moda.', se:'v2'},
+ {cod:'VI003', n:'Vinilo verde salvia',  cat:'Vinilo',  pr:26000, co:16000, st:12, d:'Tendencia para espacios relajados.', se:'v3'},
+ {cod:'VI004', n:'Vinilo terracota',     cat:'Vinilo',  pr:28000, co:17000, st:0,  d:'Color cáscara de alta rotación.', se:'v4'},
+ {cod:'BR001', n:'Brocha plana 2"',      cat:'Brocha',  pr:6000,  co:3000,  st:35, d:'Cerda suave para látex y vinilo.', se:'b1'},
+ {cod:'BR002', n:'Brocha redonda 3"',    cat:'Brocha',  pr:8000,  co:4000,  st:28, d:'Para esquinas y molduras.', se:'b2'},
+ {cod:'AC001', n:'Acabado anti-hongo',   cat:'Acabado', pr:45000, co:30000, st:9,  d:'Protege baños y zonas húmedas.', se:'a1'},
+ {cod:'AC002', n:'Sellador transparente',cat:'Acabado', pr:38000, co:25000, st:4,  d:'Sella maderas y superficies porosas.', se:'a2'}
 ];
-function fmt(n){ return '$ ' + n.toLocaleString('es-CO'); }
+var his = [
+ {n:1, t:'09:12', it:[{i:inv[3]},{q:2}], sub:30000, iva:5700, tot:35700, m:'Efectivo'},
+ {n:2, t:'09:38', it:[{i:inv[8]},{q:3}], sub:84000, iva:15960, tot:99960, m:'Nequi'}
+];
 var cart = {};
-function renderProd(){
-  var el = document.getElementById('prod');
-  el.innerHTML = '';
-  var q = (document.getElementById('bus').value || '').toLowerCase();
-  var t = document.querySelector('.bar button.on').dataset.t;
-  PROD.forEach(function(p){
-    if (t !== 'todos' && p.t !== t) return;
-    if (q && (p.n + ' ' + p.d).toLowerCase().indexOf(q) < 0) return;
+var seq = 2;
+var cats = ['Pegante','Esmalte','Vinilo','Brocha','Acabado'];
+
+$ = function(i){ return document.getElementById(i); };
+function fmt(n){ return '$ ' + Math.round(n).toLocaleString('es-CO'); }
+var dToday = new Date().toLocaleDateString('es-CO', {day:'2-digit',month:'2-digit',year:'numeric'});
+
+function badge(m){
+  var map = {Efectivo:'mE', Tarjeta:'mT', Nequi:'mN', Daviplata:'mD'};
+  return '<span class="payb ' + (map[m] || 'mT') + '">' + m + '</span>';
+}
+function stockBadge(s){
+  if (s <= 0) return '<span class="stok s-no">Sin stock</span>';
+  if (s <= 5) return '<span class="stok s-lo">Stock bajo</span>';
+  return '<span class="stok s-ok">' + s + ' u.</span>';
+}
+function urepg(){
+  document.querySelectorAll('[data-se]').forEach(function(x){
+    var seed = x.getAttribute('data-se');
+    x.style.backgroundImage = 'url(https://picsum.photos/seed/' + seed + '/600/420)';
+  });
+}
+
+function rendGrid(){
+  var q = ($('q').value || '').toLowerCase();
+  var cc = document.querySelector('.cats button.on').getAttribute('data-c');
+  var g = $('grid'); g.innerHTML = '';
+  inv.forEach(function(p){
+    if (cc !== '__all' && p.cat !== cc) return;
+    if (q && !(p.n.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || p.cod.toLowerCase().includes(q))) return;
     var d = document.createElement('div');
-    d.className = 'p';
-    d.innerHTML = '<div class="sw" style="background:' + p.c + '"></div>' +
-      '<div class="n">' + p.n + '</div><div class="d">' + p.d + '</div><div class="pr">' + fmt(p.p) + '</div><span class="var">' + (p.t === 'interior' ? 'Interior' : p.t === 'exterior' ? 'Exterior' : 'Madera') + '</span>';
-    var b = document.createElement('button');
-    b.textContent = 'Agregar';
+    d.className = 'prod';
+    d.innerHTML =
+      '<div class="ph" data-se="' + p.se + '"><span class="sto" style="background:' + (p.st <= 0 ? '#dc2626' : p.st <= 5 ? '#d97706' : 'rgba(15,23,42,.8)') + '">' + (p.st <= 0 ? 'SIN STOCK' : p.st + ' en stock') + '</span></div>' +
+      '<div class="tag">' + p.cod + ' · ' + p.cat + '</div>' +
+      '<h3>' + p.n + '</h3><div class="d">' + p.d + '</div>' +
+      '<div class="row"><b>' + fmt(p.pr) + '</b><button class="add">+</button></div>';
+    var btn = d.querySelector('.add');
+    btn.disabled = p.st <= 0;
+    if (p.st <= 0) btn.style.background = '#cbd5e1';
+    btn.onclick = function(e){ e.stopPropagation(); add(p); };
+    d.onclick = function(){ det(p); };
+    g.appendChild(d);
+  });
+  if (!g.children.length) g.innerHTML = '<p style="grid-column:1/-1;color:#5b6b82;text-align:center;padding:40px">Sin resultados.</p>';
+  urepg();
+}
+
+function add(p){
+  if (p.st <= 0) return;
+  if (cart[p.cod] && cart[p.cod].q >= p.st){ toast('Solo hay ' + p.st + ' de ' + p.n); return; }
+  cart[p.cod] = cart[p.cod] ? {q:cart[p.cod].q + 1} : {q:1};
+  rCart();
+}
+function addN(p, n){
+  cart[p.cod] = {q:n};
+  rCart();
+}
+function chgQ(cod, d){
+  var p = inv.find(function(x){ return x.cod === cod; });
+  var q = (cart[cod].q || 0) + d;
+  if (q <= 0){ delete cart[cod]; }
+  else if (q > p.st){ toast('Stock máximo: ' + p.st); return; }
+  else cart[cod].q = q;
+  rCart();
+}
+function itemRow(cod){
+  var p = inv.find(function(x){ return x.cod === cod; });
+  return '<div class="ci"><div class="n"><b>' + p.n + '</b><span>' + fmt(p.pr) + '</span></div>' +
+    '<div class="q"><button onclick="chgQ(\'' + cod + '\',-1)">−</button>' + cart[cod].q + '<button onclick="chgQ(\'' + cod + '\',1)">+</button></div>' +
+    '<span class="p">' + fmt(p.pr * cart[cod].q) + '</span></div>';
+}
+function rCart(){
+  $('cnt').textContent = Object.keys(cart).length;
+  $('items').innerHTML = Object.keys(cart).length ? Object.keys(cart).map(itemRow).join('') :
+    '<div class="emp">La canasta está vacía.<br>Añade productos para iniciar la venta.</div>';
+  var sub = 0;
+  Object.keys(cart).forEach(function(c){ sub += inv.find(function(x){ return x.cod === c; }).pr * cart[c].q; });
+  var iva = sub * .19, tot = sub + iva;
+  $('sSub').textContent = fmt(sub); $('sIva').textContent = fmt(iva); $('sTot').textContent = fmt(tot);
+  var go = $('go');
+  go.disabled = sub <= 0;
+  if (sub > 0 && cart) {}; 
+  $('rec').value = ''; $('dev').value = '';
+}
+
+function det(p){
+  $('mdlB').innerHTML =
+    '<div class="ph" data-se="' + p.se + '"></div>' +
+    '<div class="tag">' + p.cod + ' · ' + p.cat + '</div>' +
+    '<h3>' + p.n + '</h3><p class="d">' + p.d + '</p>' +
+    '<p class="d" style="color:#0b1220"><b>Stock:</b> ' + stockBadge(p.st) + '</p>' +
+    '<div class="f"><span>Precio</span><b>' + fmt(p.pr) + '</b></div>' +
+    '<div class="acts"><button class="x" data-x>Cerrar</button><button class="ok" data-k>Añadir al carrito</button></div>';
+  $('mdl').classList.add('open');
+  urepg();
+  $('mdlB').querySelector('[data-x]').onclick = closeM;
+  $('mdlB').querySelector('[data-k]').onclick = function(){ add(p); closeM(); };
+}
+function closeM(){ $('mdl').classList.remove('open'); }
+$('mdl').onclick = function(e){ if (e.target === this) closeM(); };
+
+function sell(){
+  var sub = 0;
+  Object.keys(cart).forEach(function(c){ sub += inv.find(function(x){ return x.cod === c; }).pr * cart[c].q; });
+  if (!Object.keys(cart).length){ toast('Carrito vacío'); return; }
+  Object.keys(cart).forEach(function(c){
+    var p = inv.find(function(x){ return x.cod === c; });
+    p.st = Math.max(0, p.st - cart[c].q);
+  });
+  var rec = +$('rec').value || 0;
+  var evo = rec - sub * 1.19;
+  if (pay === 'Efectivo' && rec >= 0 && !$('dev').value){
+    if (evo < 0){ toast('El efectivo recibido no cubre el total'); return; }
+  }
+  if (evo < 0 && rec >= 0 && pay === 'Efectivo'){ toast('El efectivo recibido no cubre el total'); return; }
+  var now = new Date();
+  var hh = ('0' + now.getHours()).slice(-2);
+  var mm = ('0' + now.getMinutes()).slice(-2);
+  his.push({n: ++seq, t: hh + ':' + mm, it: Object.keys(cart).map(function(c){ return {i: inv.find(function(x){ return x.cod === c; }), q: cart[c].q}; }), sub: sub, iva: sub * .19, tot: sub * 1.19, m: pay});
+  cart = {};
+  rCart(); rendGrid(); rHis(); rKpi();
+  toast('Venta #' + seq + ' registrada · ' + fmt(sub * 1.19));
+}
+
+function listInv(){
+  $('tInvB').innerHTML = inv.map(function(p){
+    return '<tr><td><b>' + p.n + '</b><br><span class="tag">' + p.cod + '</span></td><td>' + p.cat + '</td>' +
+      '<td>' + stockBadge(p.st) + '</td><td>' + fmt(p.co) + '</td><td>' + fmt(p.pr) + '</td>' +
+      '<td>' + fmt(p.co * p.st) + '</td>' +
+      '<td><button class="del" onclick="mov(\'' + p.cod + '\')">Entrada / Salida</button></td></tr>';
+  }).join('');
+}
+function rHis(){
+  $('tHisB').innerHTML = his.map(function(h){
+    var its = h.it.map(function(x){ return x.i.n + ' ×' + x.q; }).join(', ');
+    return '<tr><td><b>#' + h.n + '</b><br><small>' + its + '</small></td><td>' + h.t + '</td>' +
+      '<td>' + h.it.reduce(function(a, x){ return a + x.q; }, 0) + '</td>' +
+      '<td>' + fmt(h.sub) + '</td><td>' + fmt(h.iva) + '</td><td><b>' + fmt(h.tot) + '</b></td>' +
+      '<td>' + badge(h.m) + '</td><td><button class="del" onclick="rDel(' + h.n + ')">Anular</button></td></tr>';
+  }).join('');
+}
+function rDel(n){
+  var h = his.find(function(x){ return x.n === n; });
+  h.it.forEach(function(x){
+    inv.find(function(p){ return p.cod === x.i.cod; }).st += x.q;
+  });
+  his = his.filter(function(x){ return x.n !== n; });
+  rHis(); rendGrid(); rKpi();
+  toast('Venta #' + n + ' anulada. Stock repuesto.');
+}
+function rKpi(){
+  var tod = his;
+  var s = tod.reduce(function(a, h){ return a + h.tot; }, 0);
+  $('kHoy').textContent = fmt(s);
+  $('kN').textContent = tod.length;
+  $('kProm').textContent = tod.length ? fmt(s / tod.length) : '$ 0';
+  $('kInv').textContent = fmt(inv.reduce(function(a, p){ return a + p.co * p.st; }, 0));
+}
+
+function mov(cod){
+  var p = inv.find(function(x){ return x.cod === c; });
+  var t = prompt('Mover stock de: ' + p.n + '\nEscribe +N para ENTRADA o −N para SALIDA');
+  if (t === null) return;
+  var n = +t;
+  if (!t || isNaN(n)){ toast('Valor no válido'); return; }
+  p.st += n;
+  if (p.st < 0){ p.st = 0; toast('El stock no puede quedar negativo'); }
+  rHis(); rendGrid(); rKpi(); listInv();
+  toast((n > 0 ? 'Entrada de ' : 'Salida de ') + Math.abs(n) + ' · ' + p.n);
+}
+
+function tabs(){
+  $('tV').onclick = function(){
+    setT('Vender');
+  };
+  $('tI').onclick = function(){
+    setT('Inventario');
+    listInv();
+  };
+  $('tH').onclick = function(){
+    setT('Historial');
+    rHis();
+  };
+  $('go').onclick = sell;
+  document.querySelectorAll('.pay button').forEach(function(b){
     b.onclick = function(){
-      cart[p.n] = (cart[p.n] || {prod: p, q: 0});
-      cart[p.n].q++;
-      renderCart();
+      pay = b.textContent;
+      document.querySelectorAll('.pay button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      $('chg').classList.toggle('fill', pay !== 'Efectivo');
+      if (pay !== 'Efectivo') $('dev').value = '';
     };
-    d.appendChild(b);
-    el.appendChild(d);
   });
-  if (!el.children.length) el.innerHTML = '<div style="color:#80868b;font-size:13px">Sin resultados.</div>';
 }
-function renderCart(){
-  var el = document.getElementById('cart');
-  el.innerHTML = '';
-  var total = 0;
-  Object.keys(cart).forEach(function(k){
-    var o = cart[k];
-    total += o.prod.p * o.q;
-    var r = document.createElement('div');
-    r.className = 'cart-row';
-    r.innerHTML = '<div class="name">' + k + '</div>' +
-      '<div style="display:flex;align-items:center;gap:8px"><button data-k="' + k + '" data-d="-1">-</button>' + o.q + '<button data-k="' + k + '" data-d="1">+</button></div>' +
-      '<div style="font-weight:600">' + fmt(o.prod.p * o.q) + '</div>';
-    r.querySelectorAll('button').forEach(function(b){
-      b.onclick = function(){
-        cart[b.dataset.k].q += parseInt(b.dataset.d, 10);
-        if (cart[b.dataset.k].q <= 0) delete cart[b.dataset.k];
-        renderCart();
-      };
-    });
-    el.appendChild(r);
+function setT(w){
+  ['tV','tI','tH'].forEach(function(id){
+    $('tInv').classList.add('fill'); $('tHis').classList.add('fill'); $('grid').classList.add('fill');
   });
-  if (!Object.keys(cart).length) el.innerHTML = '<div style="color:#80868b;font-size:13px">Tu carrito está vacío.</div>';
-  document.getElementById('totalv').textContent = fmt(total);
+  var upd = {Vender:'grid', Inventario:'tInv', Historial:'tHis'};
+  $(upd[w]).classList.remove('fill');
+  document.querySelectorAll('.tabs button').forEach(function(b){ b.classList.remove('on'); });
+  $({Vender:'tV', Inventario:'tI', Historial:'tH'}[w]).classList.add('on');
 }
-document.getElementById('bus').oninput = renderProd;
-document.querySelectorAll('.bar button').forEach(function(b){
+
+function toast(m){
+  var t = $('toast');
+  t.textContent = m;
+  t.classList.add('show');
+  clearTimeout(t._tm);
+  t._tm = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+
+$('q').oninput = rendGrid;
+document.querySelectorAll('.cats button').forEach(function(b){
   b.onclick = function(){
-    document.querySelectorAll('.bar button').forEach(function(x){ x.classList.remove('on'); });
+    document.querySelectorAll('.cats button').forEach(function(x){ x.classList.remove('on'); });
     b.classList.add('on');
-    renderProd();
+    rendGrid();
   };
 });
-document.getElementById('pay').onclick = function(){
-  if (!Object.keys(cart).length){ alert('Agrega un producto.'); return; }
-  document.getElementById('msg').style.display = 'block';
-  setTimeout(function(){ document.getElementById('msg').style.display = 'none'; }, 3000);
+$('rec').oninput = function(){
+  var r = +this.value || 0;
+  var tot = +$('sTot').textContent.replace(/[^0-9]/g, '');
+  $('dev').value = (r >= tot && pay === 'Efectivo') ? fmt(r - tot) : '';
 };
-renderProd();
-renderCart();
+
+rKpi();
+rCart();
+rendGrid();
+rHis();
+tabs();
+document.title = 'Pinturitas & CIA · Punto de Venta';
 </script>
+<style>
+.jm-mark{position:fixed;left:16px;bottom:16px;z-index:1200;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 9px;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid rgba(11,18,32,.12);box-shadow:0 6px 18px -10px rgba(11,18,32,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#3c4a5f;font:600 11px Inter,system-ui,sans-serif;letter-spacing:.1px;cursor:default;user-select:none;opacity:.9;white-space:nowrap;text-decoration:none;}
+.jm-mark .jm-ic{width:20px;height:20px;border-radius:7px;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:grid;place-items:center;flex:none;}
+.jm-mark b{color:#111729;font-weight:700;}
+.jm-mark:hover{opacity:1;}
+</style>
+<a class="jm-mark" href="index.html" title="Diseñado y desarrollado por Jheremy Medina">
+  <span class="jm-ic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5.25 3.4 9.74 8 11 4.6-1.26 8-5.75 8-11V5l-8-3Z"/><path d="m8.5 12 2.2 2.2L15.5 9.5"/></svg></span>
+  <span>Hecho por <b>Jheremy Medina</b></span>
+</a>
 </body>
 </html>

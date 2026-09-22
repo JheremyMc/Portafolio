@@ -3,141 +3,374 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hotel · Demo</title>
+<title>Hotel Miradores del Valle · Experiencia exclusiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  :root{--ink:#0b1220;--bg:#f8fafc;--acc:#0e7490;--acc2:#155e75;--gold:#d4a017;--line:#e2e8f0;--mut:#52607a;}
   *{box-sizing:border-box;}
-  body{margin:0;font-family:'Google Sans',Roboto,Arial,sans-serif;color:#202124;background:#f7f8fb;}
-  a{color:#1a73e8;text-decoration:none;}
-  .top{background:#fff;border-bottom:1px solid #e8eaed;padding:14px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .top .site{font-weight:700;font-size:17px;}
-  .top .dem{font-size:12px;color:#80868b;background:#f1f3f4;border-radius:12px;padding:3px 10px;}
-  .top .back{margin-left:auto;font-size:13px;}
-  .main{display:flex;gap:18px;padding:20px 24px 30px;flex-wrap:wrap;}
-  .col{flex:1;min-width:320px;background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:18px;}
-  .col h2{font-size:16px;font-weight:600;margin:0 0 14px;}
-  .rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;}
-  .room{border:1px solid #e8eaed;border-radius:12px;padding:14px;position:relative;}
-  .room .no{font-size:12px;color:#80868b;}
-  .room .nm{font-weight:600;margin:2px 0 4px;}
-  .room .feat{font-size:12px;color:#5f6368;margin-bottom:8px;}
-  .room .pr{font-size:16px;font-weight:600;color:#1a73e8;margin-bottom:8px;}
-  .room .st{display:inline-block;border-radius:10px;padding:3px 10px;font-size:11.5px;font-weight:600;}
-  .st.lib{background:#e6f4ea;color:#188038;}
-  .st.ocu{background:#fce8e6;color:#c5221f;}
-  .st.lim{background:#fef7e0;color:#b06000;}
-  label{display:block;font-size:13px;color:#3c4043;margin:10px 0 5px;font-weight:500;}
-  input,select{width:100%;padding:9px 11px;border:1px solid #dadce0;border-radius:8px;font:400 14px 'Google Sans',Roboto,sans-serif;}
-  input:focus,select:focus{outline:none;border-color:#1a73e8;box-shadow:0 0 0 1px #1a73e8 inset;}
-  .btn{width:100%;margin-top:16px;padding:11px;border:none;border-radius:20px;background:#1a73e8;color:#fff;font:500 14px 'Google Sans',Roboto,sans-serif;cursor:pointer;}
-  .btn:hover{background:#1765cc;}
-  .btn:disabled{background:#dadce0;cursor:not-allowed;}
-  .msg{background:#e6f4ea;color:#188038;border-radius:10px;padding:10px 12px;font-size:13.5px;display:none;margin-top:14px;}
-  .summary{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
-  .summary span{background:#f1f3f4;border-radius:12px;padding:6px 12px;font-size:12.5px;color:#3c4043;}
-  .summary b{color:#202124;}
-  .foot{text-align:center;padding:18px 16px;color:#80868b;font-size:12.5px;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);}
+  h1,h2,h3,.disp{font-family:'Sora';}
+  a{text-decoration:none;color:inherit;}
+  .mnu{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;gap:20px;padding:14px 30px;transition:.3s;color:#fff;}
+  .mnu.on{background:rgba(255,255,255,.9);color:var(--ink);box-shadow:0 1px 0 var(--line);backdrop-filter:blur(10px);}
+  .mnu .lg{font-family:'Sora';font-weight:800;font-size:16px;display:flex;align-items:center;gap:9px;}
+  .mnu .lg i{width:11px;height:11px;border-radius:50%;background:var(--gold);}
+  .mnu nav{margin-left:auto;display:flex;gap:4px;}
+  .mnu nav a{padding:8px 13px;border-radius:12px;font-size:13px;font-weight:600;opacity:.9;}
+  .mnu nav a:hover{background:rgba(255,255,255,.15);}
+  .mnu.on nav a:hover{background:#eef6f8;color:var(--acc2);}
+  .mnu .bt{padding:9px 18px;border:none;border-radius:999px;background:var(--gold);color:#0b1220;font:700 13px 'Inter';cursor:pointer;}
+  @media(max-width:760px){.mnu nav{display:none;}}
+
+  .hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;color:#fff;overflow:hidden;background:var(--ink);}
+  .hero .bg{position:absolute;inset:0;background-size:cover;background-position:center;animation:kb 16s ease infinite alternate;}
+  @keyframes kb{from{transform:scale(1)}to{transform:scale(1.14)}}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,20,35,.5),rgba(9,20,35,.12) 42%,rgba(9,20,35,.82));}
+  .hero .ct{position:relative;z-index:2;width:min(1120px,100%);margin:0 auto;padding:0 34px;}
+  .hero .tag{display:inline-block;background:rgba(212,160,23,.16);border:1px solid rgba(212,160,23,.5);color:#f6d886;border-radius:999px;padding:7px 15px;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;}
+  .hero h1{font-size:clamp(38px,6vw,64px);font-weight:800;line-height:1.04;margin:20px 0 16px;letter-spacing:-1px;}
+  .hero h1 em{font-style:normal;color:#f6d886;}
+  .hero p{font-size:17px;color:#dde7f2;max-width:620px;line-height:1.75;margin:0 0 28px;}
+  .quick{display:flex;gap:12px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.22);border-radius:18px;padding:16px;flex-wrap:wrap;align-items:end;max-width:760px;}
+  .quick label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:#cbd8e6;margin-bottom:6px;}
+  .quick input,.quick select{border:none;background:#fff;color:var(--ink);border-radius:10px;padding:10px 12px;font:600 13.5px 'Inter';}
+  .quick input:focus,.quick select:focus{outline:2px solid var(--gold);}
+  .quick .go{border:none;border-radius:12px;background:var(--gold);color:#0b1220;font:800 14px 'Inter';padding:12px 22px;cursor:pointer;}
+  .quick .go:hover{filter:brightness(1.08);}
+  .perks{display:flex;gap:22px;margin-top:26px;flex-wrap:wrap;font-size:13px;color:#d7e2ef;}
+  .perks span{display:flex;gap:8px;align-items:center;}
+  .perks svg{color:var(--gold);}
+
+  section{max-width:1120px;margin:0 auto;padding:92px 30px;}
+  .hh{text-align:center;margin-bottom:44px;}
+  .eyb{color:var(--acc);font-size:12px;font-weight:800;letter-spacing:2.4px;}
+  .hh h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.5px;margin:8px 0 12px;}
+  .hh p{color:var(--mut);max-width:640px;margin:0 auto;line-height:1.7;}
+
+  .rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px;}
+  .rm{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;position:relative;}
+  .rm:hover{transform:translateY(-7px);box-shadow:0 34px 54px -34px rgba(11,18,32,.5);}
+  .rm .ph{height:200px;background-size:cover;background-position:center;position:relative;}
+  .rm .ph .badge{position:absolute;top:12px;left:12px;background:rgba(212,160,23,.92);color:#0b1220;border-radius:9px;padding:5px 11px;font-size:11px;font-weight:800;letter-spacing:.4px;}
+  .rm .ph .lon{position:absolute;bottom:12px;left:12px;background:rgba(11,18,32,.72);color:#fff;border-radius:9px;padding:6px 12px;font-size:11.5px;font-weight:700;backdrop-filter:blur(4px);display:flex;gap:7px;align-items:center;}
+  .rm .bd{padding:20px;display:flex;flex-direction:column;flex:1;}
+  .rm h3{margin:0 0 7px;font-size:18.5px;}
+  .rm .ft{color:var(--mut);font-size:13px;display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:12px;list-style:none;padding:0;margin:0 0 14px;}
+  .rm .ft li{display:flex;gap:7px;align-items:center;width:calc(50% - 7px);}
+  .rm .ft svg{color:var(--acc);flex:none;}
+  .rm .pr{margin-top:auto;display:flex;align-items:baseline;gap:8px;}
+  .rm .pr b{font-family:'Sora';font-size:22px;}
+  .rm .pr small{color:var(--mut);font-size:12px;}
+  .rm .bt{margin-top:14px;border:none;border-radius:12px;background:var(--acc);color:#fff;font:700 14px 'Inter';padding:12px;cursor:pointer;transition:.2s;}
+  .rm .bt:hover{background:var(--acc2);}
+
+  .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:10px;}
+  .st{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;gap:14px;align-items:center;}
+  .st svg{color:var(--gold);flex:none;}
+  .st b{display:block;font-size:14px;}
+  .st span{font-size:12.5px;color:var(--mut);}
+
+  .amg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;}
+  .am{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;text-align:center;transition:.25s;}
+  .am:hover{transform:translateY(-5px);box-shadow:0 22px 36px -28px rgba(11,18,32,.45);}
+  .am svg{color:var(--acc);margin-bottom:10px;}
+  .am b{display:block;font-size:14px;margin-bottom:4px;}
+  .am span{font-size:12px;color:var(--mut);line-height:1.5;display:block;}
+
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media(max-width:760px){.gal{grid-template-columns:repeat(2,1fr);}}
+  .gal figure{margin:0;position:relative;border-radius:16px;overflow:hidden;cursor:zoom-in;height:215px;}
+  .gal figure:nth-child(2){transform:translateY(18px);}
+  .gal img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .gal figure:hover img{transform:scale(1.08);}
+
+  .welcome{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center;}
+  @media(max-width:820px){.welcome{grid-template-columns:1fr;}}
+  .welcome .p{width:100%;border-radius:22px;height:400px;background-size:cover;background-position:center;box-shadow:0 34px 56px -40px rgba(11,18,32,.55);}
+  .welcome h2{font-size:clamp(24px,3.5vw,34px);font-weight:800;margin:0 0 14px;letter-spacing:-.5px;}
+  .welcome p{color:var(--mut);line-height:1.8;font-size:15px;margin:0 0 14px;}
+  .welcome .cta{display:inline-flex;align-items:center;gap:9px;border:none;border-radius:13px;background:var(--ink);color:#fff;font:700 14px 'Inter';padding:13px 22px;margin-top:8px;cursor:pointer;}
+
+  .foot{background:#0b1220;color:#c3cfe1;text-align:center;padding:44px 24px;margin-top:20px;}
+  .foot b{color:#fff;font-family:'Sora';}
+  .foot .zp{color:#8ab6ff;margin:0 10px;}
+  .foot a:hover{color:#fff;}
+
+  .modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(11,18,32,.6);backdrop-filter:blur(6px);padding:20px;}
+  .modal.open{display:flex;}
+  .modal .box{background:#fff;border-radius:22px;max-width:520px;width:100%;padding:30px;box-shadow:0 40px 80px -40px rgba(0,0,0,.6);animation:pop .35s cubic-bezier(.2,.9,.3,1.2);max-height:92vh;overflow:auto;}
+  @keyframes pop{from{opacity:0;transform:translateY(20px) scale(.96);}to{opacity:1;transform:none;}}
+  .modal h3{font-size:22px;margin:0 0 4px;}
+  .modal .sub{color:var(--mut);font-size:13px;margin-bottom:18px;}
+  .modal label{display:block;font-size:12.5px;font-weight:600;color:var(--ink2,#1e293b);margin:12px 0 6px;}
+  .modal input,.modal select{width:100%;border:1px solid #d3dbe8;border-radius:10px;padding:11px;font:600 14px 'Inter';}
+  .modal input:focus,.modal select:focus{outline:2px solid var(--acc);border-color:transparent;}
+  .modal .tot{display:flex;justify-content:space-between;align-items:center;background:#f1f6f8;border-radius:12px;padding:14px 16px;margin-top:18px;}
+  .modal .tot b{font-family:'Sora';font-size:22px;color:var(--acc2);}
+  .modal .acts{display:flex;gap:10px;margin-top:18px;}
+  .modal .acts button{flex:1;border:none;border-radius:12px;padding:13px;font:700 14px 'Inter';cursor:pointer;}
+  .modal .cancel{background:#eef2f7;color:#3c4a5c;}
+  .modal .ok{background:var(--gold);color:#0b1220;}
+  .success{text-align:center;padding:10px 0;}
+  .success .chk{width:70px;height:70px;border-radius:50%;background:#dcfce7;color:#16a34a;display:grid;place-items:center;margin:0 auto 16px;font-size:34px;}
+  .success h3{font-size:22px;margin:0 0 8px;}
+  .success p{color:var(--mut);font-size:14px;line-height:1.7;margin:0;}
+  .flt{position:fixed;bottom:18px;right:18px;z-index:45;display:none;border:none;background:var(--gold);color:#0b1220;font:800 14px 'Inter';border-radius:999px;padding:14px 22px;box-shadow:0 16px 30px -14px rgba(212,160,23,.8);cursor:pointer;}
+  @media(max-width:760px){.flt{display:block;}}
+  .reveal{opacity:0;transform:translateY(26px);transition:.7s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in{opacity:1;transform:none;}
 </style>
 </head>
 <body>
 
-<div class="top">
-  <div class="site">Hotel Miradores del Valle</div>
-  <span class="dem">Demo del portafolio</span>
-  <a class="back" href="index.html">&larr; Volver al portafolio</a>
+<div class="mnu" id="mnu">
+  <div class="lg"><i></i> Miradores del Valle</div>
+  <nav>
+    <a href="#rooms">Habitaciones</a>
+    <a href="#exp">Experiencias</a>
+    <a href="#amen">Servicios</a>
+    <a href="#gal">Galería</a>
+    <a href="#wel">El hotel</a>
+  </nav>
+  <button class="bt" onclick="openRes('')">Reservar</button>
 </div>
 
-<div class="main">
-  <div class="col">
-    <h2>Habitaciones</h2>
-    <div class="rooms" id="rooms"></div>
+<header class="hero">
+  <div class="bg" data-img="h-hero"></div>
+  <div class="ct">
+    <span class="tag">Experiencia exclusiva · reserva directa</span>
+    <h1>Despierta con vista al mar.<br>Termina la noche en tu <em>jacuzzi</em>.</h1>
+    <p>Miradores del Valle no es un hotel: es el destino. Jacuzzi privado en tu habitación, suites con vista directa al mar, tardes de piscina templada y noches de vino en la terraza. Exclusivo, divertido e inolvidable.</p>
+    <div class="quick">
+      <div><label>Llegada</label><input id="qArr" type="date"></div>
+      <div><label>Salida</label><input id="qDep" type="date"></div>
+      <div><label>Huéspedes</label><select id="qP"><option>1</option><option>2</option><option>3</option><option selected>4</option></select></div>
+      <button class="go" onclick="quickGo()">Ver disponibilidad</button>
+    </div>
+    <div class="perks">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg> Mejor precio garantizado</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg> Cancelación flexible 48 h</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg> Desayuno gourmet incluido</span>
+    </div>
   </div>
+</header>
 
-  <div class="col">
-    <h2>Hacer una reserva</h2>
-    <label for="nombre">Nombre del huésped</label>
-    <input id="nombre" type="text" value="">
-    <label for="tipo">Tipo de habitación</label>
-    <select id="tipo"></select>
-    <label for="fecha1">Entrada</label>
-    <input id="fecha1" type="date">
-    <label for="fecha2">Salida</label>
-    <input id="fecha2" type="date">
-    <div class="pr" id="cost"></div>
-    <button class="btn" id="res">Confirmar reserva</button>
-    <div class="msg" id="msg">Reserva confirmada. ¡Gracias por elegirnos!</div>
-    <div class="summary" id="sum"></div>
-  </div>
+<div class="strip" style="max-width:1120px;margin:-34px auto 0;position:relative;z-index:5;padding:0 30px;">
+  <div class="st"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c3 3 6 6 6 10a6 6 0 0 1-12 0c0-4 3-7 6-10Z"/><path d="M9 14h6"/></svg><div><b>Jacuzzi en tus planes</b><span>En 3 de cada 4 habitaciones y en todas las suites.</span></div></div>
+  <div class="st"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12h20"/><path d="M12 2v20"/><circle cx="12" cy="12" r="10"/></svg><div><b>Vista al mar</b><span>Orientación privilegiada en las suites y favoritas.</span></div></div>
+  <div class="st"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg><div><b>Experiencias incluidas</b><span>Brindis de bienvenida y amenities de cortesía.</span></div></div>
 </div>
 
-<div class="foot">Hotel &middot; demo HTML/CSS/JS &middot; parte del portafolio del ingeniero</div>
+<section id="rooms">
+  <div class="hh reveal"><div class="eyb">Habitaciones y suites</div><h2>Elige tu nivel de exclusividad</h2><p>Desde la estancia acogedora hasta la suite que lo tiene todo. Cada una fue pensada para que la estadía se convierta en la mejor anécdota de tu año.</p></div>
+  <div class="rooms" id="rooms"></div>
+</section>
+
+<section id="exp" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:none;">
+  <div style="max-width:1120px;margin:0 auto;padding:92px 30px;">
+    <div class="hh reveal"><div class="eyb">Experiencias premium</div><h2>Más que dormir: momentos para presumir</h2><p>Incluidas o como upgrade, así se vive Miradores del Valle.</p></div>
+    <div class="amg">
+      <div class="am reveal"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><b>Atardecer privado</b><span>Terraza solo para ti con vino y vista al mar.</span></div>
+      <div class="am reveal" style="transition-delay:.05s"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3 6 6l-3 1 2 3-1 3 3 2 1-3"/><path d="M11 7v6l3 2 2-4"/><path d="m21 16-7 5-4-3"/></svg><b>Spa en pareja</b><span>Masajes, aromaterapia y sesión de jacuzzi.</span></div>
+      <div class="am reveal" style="transition-delay:.1s"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18v7H3zM6 10v4M18 10v4"/><path d="M5 21c5-5 9-5 14 0"/></svg><b>Chef a la suite</b><span>Degustación local servida en tu jacuzzi.</span></div>
+      <div class="am reveal" style="transition-delay:.15s"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0-2 0v7H5.5a1 1 0 0 0-.8 1.6"/><path d="M13 10H8"/></svg><b>Noches de risas</b><span>Juegos de mesa, canta-rancho y fogata.</span></div>
+      <div class="am reveal" style="transition-delay:.2s"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19 9 6l3 9 2-5 3 9z"/></svg><b>Tour en bicicleta</b><span>Ruta al mar y playas cercanas con guía.</span></div>
+      <div class="am reveal" style="transition-delay:.25s"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><b>Brindis de bienvenida</b><span>Champán o jugo de cortesía al llegar.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="amen">
+  <div class="hh reveal"><div class="eyb">Servicios</div><h2>Todo lo que necesitas, sin salir</h2></div>
+  <div class="amg">
+    <div class="am reveal"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20h20M4 20V8a8 8 0 0 1 16 0v12"/><path d="M8 20v-6a4 4 0 0 1 8 0v6"/></svg><b>Piscina templada</b><span>Exclusiva para huéspedes</span></div>
+    <div class="am reveal" style="transition-delay:.05s"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c3 3 6 6 6 10a6 6 0 0 1-12 0c0-4 3-7 6-10Z"/><path d="M9 14h6"/></svg><b>Jacuzzi y spa</b><span>Privado en suites</span></div>
+    <div class="am reveal" style="transition-delay:.1s"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11h18M12 11V4M4 11v9h16v-9"/><path d="M7 14h.01M17 17h.01"/></svg><b>Restaurante gourmet</b><span>Cocina del mar y del valle</span></div>
+    <div class="am reveal" style="transition-delay:.15s"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5a7 7 0 0 1 14 0M12 6v8"/><circle cx="12" cy="18" r="2"/></svg><b>Wi-Fi fibra</b><span>En todo el hotel</span></div>
+    <div class="am reveal" style="transition-delay:.2s"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3v12a6 6 0 0 0 12 0V3h-4"/><path d="M6 7h8"/></svg><b>Gimnasio 24 h</b><span>Abierto siempre</span></div>
+    <div class="am reveal" style="transition-delay:.25s"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V10l7-6 7 6v11"/><path d="M10 21v-6h4v6"/></svg><b>Parqueadero</b><span>Gratis y vigilado</span></div>
+  </div>
+</section>
+
+<section id="gal">
+  <div class="hh reveal"><div class="eyb">Galería</div><h2>Vívelo antes de llegar</h2></div>
+  <div class="gal" id="gal"></div>
+</section>
+
+<section id="wel">
+  <div class="welcome">
+    <div data-img="h-wel" class="p reveal" role="img" aria-label="Hotel Miradores del Valle"></div>
+    <div class="reveal">
+      <div class="eyb">El hotel</div>
+      <h2>Un lugar hecho para quedarte</h2>
+      <p>Miradores del Valle nació para quienes buscan desconectarse del ruido y conectarse con lo que importa. Nuestras habitaciones combinan calidez local con detalles que sí se notan: jacuzzi privado, ropa de cama premium, cafetera en la habitación y desayuno gourmet incluido.</p>
+      <p>Por las tardes, la terraza se llena de luz dorada: es el momento favorito de nuestros huéspedes. Y si vienes en pareja, en familia o a celebrar algo grande, tenemos el espacio y las experiencias para que sea inolvidable.</p>
+      <button class="cta" onclick="openRes('')">Reservar mi escapada →</button>
+    </div>
+  </div>
+</section>
+
+<button class="flt" onclick="openRes('')">Reservar ahora</button>
+
+<div class="modal" id="resModal">
+  <div class="box" id="resBox"></div>
+</div>
+
+<footer class="foot" id="pie">
+  <div><b>Hotel Miradores del Valle</b><br>Carretera al Mirador km 4 · Costa Vallera</div>
+  <div style="margin:10px 0 6px">Reservas: +57 300 000 00 00 · reservas@miradoresdelvalle.com</div>
+  <div>Demo del portafolio · <a class="zp" href="index.html">← Volver al portafolio</a></div>
+</footer>
 
 <script>
+var IMG = {
+  'h-hero':['https://images.unsplash.com/photo-1551882547-ff40c63fe5fa','hh'],
+  'h-wel':['https://images.unsplash.com/photo-1551882547-ff40c63fe5fa','hw'],
+  'h1':['https://images.unsplash.com/photo-1611892440504-42a792e24d32','h1'],
+  'h2':['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b','h2'],
+  'h3':['https://images.unsplash.com/photo-1507525428034-b723cf961d3e','h3'],
+  'h4':['https://images.unsplash.com/photo-1540541338287-41700207dee6','h4'],
+  'g1':['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4','g1'],
+  'g2':['https://images.unsplash.com/photo-1571896349842-33c89424de2d','g2'],
+  'g3':['https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd','g3'],
+  'g4':['https://images.unsplash.com/photo-1564501049412-61c2a3083791','g4'],
+  'g5':['https://images.unsplash.com/photo-1445019980597-93fa8acb246c','g5'],
+  'g6':['https://images.unsplash.com/photo-1444201983204-c43cbd584d93','g6']
+};
+function setImg(el, key){
+  if (!el) return;
+  var u = IMG[key][0] + '?q=80&w=1200&auto=format&fit=crop';
+  var seed = IMG[key][1];
+  el.onerror = function(){ el.onerror = null; el.style.backgroundImage = 'url(https://picsum.photos/seed/' + seed + '/1200/800)'; };
+  el.style.backgroundImage = 'url(' + u + ')';
+}
+document.querySelectorAll('[data-img]').forEach(function(el){ setImg(el, el.getAttribute('data-img')); });
+
 var ROOMS = [
-  {id:1, no:'101', nm:'Estándar', feat:'2 personas · Wi-Fi', pr:280000, est:'lib'},
-  {id:2, no:'102', nm:'Estándar', feat:'2 personas · Wi-Fi', pr:280000, est:'ocu'},
-  {id:3, no:'201', nm:'Familiar', feat:'4 personas · balcón', pr:420000, est:'lib'},
-  {id:4, no:'202', nm:'Familiar', feat:'4 personas · balcón', pr:420000, est:'lim'},
-  {id:5, no:'301', nm:'Suite', feat:'2 personas · jacuzzi · vista', pr:650000, est:'lib'},
-  {id:6, no:'302', nm:'Suite', feat:'2 personas · jacuzzi · vista', pr:650000, est:'lib'}
+  {id:1, n:'Habitación Estándar', badge:'', lon:'Vista al jardín', pr:280000, img:'h1',
+   ft:[['Cama queen','M7 3v12a6 6 0 0 0 12 0V3h-4'],['Wi-Fi fibra','M5 12.5a7 7 0 0 1 14 0M12 6v8'],['Desayuno incluido','m5 12 5 5L20 7'],['TV 40"','M2 12h20']]},
+  {id:2, n:'Habitación con Jacuzzi', badge:'Favorita de parejas', lon:'Jacuzzi privado en terraza', pr:460000, img:'h2',
+   ft:[['Jacuzzi privado','M12 3c3 3 6 6 6 10a6 6 0 0 1-12 0c0-4 3-7 6-10Z'],['Cama queen','M7 3v12a6 6 0 0 0 12 0V3h-4'],['Desayuno incluido','m5 12 5 5L20 7'],['Amenities de cortesía','m5 12 5 5L20 7']]},
+  {id:3, n:'Habitación Vista al Mar', badge:'Más pedida', lon:'Balcón con vista directa al mar', pr:540000, img:'h3',
+   ft:[['Balcón al mar','M4 19 9 6l3 9 2-5 3 9z'],['Jacuzzi en ducha','M12 3c3 3 6 6 6 10a6 6 0 0 1-12 0c0-4 3-7 6-10Z'],['Cama king','M7 3v12a6 6 0 0 0 12 0V3h-4'],['Bar de snacks','M3 3h18v7H3zM6 10v4M18 10v4']]},
+  {id:4, n:'Suite Premium Mirador', badge:'La más deseada', lon:'Jacuzzi spa · vista 180° al mar', pr:720000, img:'h4',
+   ft:[['Jacuzzi spa privado','M12 3c3 3 6 6 6 10a6 6 0 0 1-12 0c0-4 3-7 6-10Z'],['Vista 180° al mar','M4 19 9 6l3 9 2-5 3 9z'],['Cama king premium','M7 3v12a6 6 0 0 0 12 0V3h-4'],['Conserje todo el día','M20 6 9 17l-5-5'],['Desayuno gourmet / cena','M3 3h18v7H3zM6 10v4M18 10v4']]}
 ];
-var EST = {lib:'Disponible', ocu:'Ocupada', lim:'En limpieza'};
-function fmt(n){ return '$ ' + n.toLocaleString('es-CO'); }
-function disp(hab){
+var GALS = ['g1','g2','g3','g4','g5','g6'];
+var _fmt = function(n){ return '$ ' + n.toLocaleString('es-CO'); };
+
+function renderRooms(){
   var el = document.getElementById('rooms');
   el.innerHTML = '';
-  ROOMS.forEach(function(r){
+  ROOMS.forEach(function(r, i){
     var d = document.createElement('div');
-    d.className = 'room';
-    d.innerHTML = '<div class="no">Habitación ' + r.no + '</div>' +
-      '<div class="nm">' + r.nm + '</div>' +
-      '<div class="feat">' + r.feat + '</div>' +
-      '<div class="pr">' + fmt(r.pr) + ' / noche</div>' +
-      '<span class="st ' + r.est + '">' + EST[r.est] + '</span>';
+    d.className = 'rm reveal';
+    d.style.transitionDelay = (i * .06) + 's';
+    var feats = r.ft.map(function(f){ return '<li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="' + f[1] + '"/></svg>' + f[0] + '</li>'; }).join('');
+    d.innerHTML =
+      '<div class="ph" data-img="' + r.img + '">' + (r.badge ? '<span class="badge">' + r.badge + '</span>' : '') +
+      '<span class="lon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>' + r.lon + '</span></div>' +
+      '<div class="bd"><h3>' + r.n + '</h3>' +
+      '<ul class="ft">' + feats + '</ul>' +
+      '<div class="pr"><b>' + _fmt(r.pr) + '</b><small>/noche</small></div>' +
+      '<button class="bt">Reservar esta habitación</button></div>';
+    d.querySelector('button').onclick = function(){ openRes(r.id); };
     el.appendChild(d);
   });
-  var s = document.getElementById('sum');
-  var n = ROOMS.filter(function(r){ return r.est === 'lib'; }).length;
-  s.innerHTML = '<span>Disponibles <b>' + n + '</b></span>' +
-    '<span>Ocupadas <b>' + ROOMS.filter(function(r){ return r.est === 'ocu'; }).length + '</b></span>' +
-    '<span>En limpieza <b>' + ROOMS.filter(function(r){ return r.est === 'lim'; }).length + '</b></span>';
+  document.querySelectorAll('[data-img]').forEach(function(x){ setImg(x, x.getAttribute('data-img')); });
 }
-var selT = document.getElementById('tipo');
-ROOMS.forEach(function(r, i){
-  var o = document.createElement('option');
-  o.value = r.id;
-  o.textContent = r.no + ' · ' + r.nm + ' · ' + fmt(r.pr) + '/noche';
-  selT.appendChild(o);
-});
-function calc(){
-  var r = ROOMS[+selT.value - 1] || ROOMS[0];
-  var a = document.getElementById('fecha1').value;
-  var b = document.getElementById('fecha2').value;
-  document.getElementById('cost').textContent = '';
-  if (a && b && b > a){
-    var dias = Math.round((new Date(b) - new Date(a)) / 86400000);
-    document.getElementById('cost').textContent = 'Total ' + dias + ' noche(s): ' + fmt(r.pr * dias);
-  }
+
+function renderGal(){
+  var el = document.getElementById('gal');
+  el.innerHTML = '';
+  GALS.forEach(function(g){
+    var f = document.createElement('figure');
+    var img = document.createElement('img');
+    img.loading = 'lazy';
+    var u = IMG[g][0] + '?q=80&w=800&auto=format&fit=crop';
+    img.onerror = function(){ img.onerror = null; img.src = 'https://picsum.photos/seed/' + IMG[g][1] + '/800/600'; };
+    img.src = u;
+    f.appendChild(img);
+    f.onclick = function(){ lightbox(u); };
+    el.appendChild(f);
+  });
 }
-selT.onchange = calc;
-document.getElementById('fecha1').onchange = calc;
-document.getElementById('fecha2').onchange = calc;
-document.getElementById('res').onclick = function(){
-  var nom = (document.getElementById('nombre').value || '').trim();
-  var r = ROOMS[+selT.value - 1] || ROOMS[0];
-  if (!nom){ alert('Escribe el nombre del huésped.'); return; }
-  if (r.est !== 'lib'){ alert('Esa habitación no está disponible.'); return; }
-  r.est = 'ocu';
-  disp();
-  var m = document.getElementById('msg');
-  m.textContent = 'Reserva confirmada para ' + nom + ' en la habitación ' + r.no + '. ¡Gracias por elegirnos!';
-  m.style.display = 'block';
-  document.getElementById('nombre').value = '';
-  document.getElementById('fecha1').value = '';
-  document.getElementById('fecha2').value = '';
-  document.getElementById('cost').textContent = '';
-  setTimeout(function(){ m.style.display = 'none'; }, 4000);
-};
-disp();
+function lightbox(u){
+  var m = document.createElement('div');
+  m.style.cssText = 'position:fixed;inset:0;z-index:70;background:rgba(9,15,28,.9);display:grid;place-items:center;cursor:zoom-out;';
+  m.innerHTML = '<img src="' + u + '" style="max-width:92vw;max-height:88vh;border-radius:16px;box-shadow:0 40px 90px -30px #000">';
+  m.onclick = function(){ m.remove(); };
+  document.body.appendChild(m);
+}
+
+var mnu = document.getElementById('mnu');
+addEventListener('scroll', function(){ mnu.classList.toggle('on', window.scrollY > 60); }, {passive:true});
+
+function openRes(rid){
+  var box = document.getElementById('resBox');
+  var opts = ROOMS.map(function(r){ return '<option value="' + r.id + '">' + r.n + ' · ' + _fmt(r.pr) + '</option>'; }).join('');
+  box.innerHTML =
+    '<h3>Reserva tu estadía</h3><div class="sub">Completa los datos y te confirmamos en minutos. Reserva directa = mejor precio.</div>' +
+    '<label>Habitación</label><select id="rSel">' + opts + '</select>' +
+    '<label>Nombre</label><input id="rName" placeholder="Nombre del huésped">' +
+    '<label>WhatsApp</label><input id="rTel" placeholder="+57 300 000 00 00">' +
+    '<label>Llegada</label><input id="rArr" type="date">' +
+    '<label>Salida</label><input id="rDep" type="date">' +
+    '<div class="tot"><span>Total estimado</span><b id="rTot">' + _fmt(ROOMS[0].pr) + '</b></div>' +
+    '<div class="acts"><button class="cancel" data-c>Cancelar</button><button class="ok" data-ok>Confirmar reserva</button></div>';
+  document.getElementById('resModal').classList.add('open');
+  document.getElementById('resModal').onclick = function(e){ if (e.target === this) closeRes(); };
+  box.querySelector('[data-c]').onclick = closeRes;
+  if (rid){ document.getElementById('rSel').value = rid; }
+  var calc = function(){
+    var r = ROOMS[+document.getElementById('rSel').value - 1];
+    var a = document.getElementById('rArr').value, b = document.getElementById('rDep').value;
+    var n = (a && b && b > a) ? Math.round((new Date(b) - new Date(a)) / 864e5) : 1;
+    document.getElementById('rTot').textContent = _fmt(r.pr * n);
+  };
+  document.getElementById('rSel').onchange = calc;
+  ['rArr','rDep'].forEach(function(id){ document.getElementById(id).onchange = calc; });
+  box.querySelector('[data-ok]').onclick = function(){
+    var sel = ROOMS[+document.getElementById('rSel').value - 1];
+    var nm = (document.getElementById('rName').value || '').trim();
+    if (!nm){ alert('Escribe tu nombre.'); return; }
+    box.innerHTML =
+      '<div class="success"><div class="chk"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></div>' +
+      '<h3>¡Reserva recibida!</h3>' +
+      '<p>Hola <b>' + nm + '</b>, ¡excelente elección! Te escribiremos al WhatsApp para confirmar tu <b>' + sel.n + '</b> y coordinar la seña. Si elegiste una suite, incluye amenities premium y la experiencia de bienvenida.</p>' +
+      '<div class="acts" style="margin-top:20px"><button class="ok" data-x>Listo</button></div></div>';
+    box.querySelector('[data-x]').onclick = closeRes;
+  };
+}
+function closeRes(){ document.getElementById('resModal').classList.remove('open'); }
+function quickGo(){
+  var a = document.getElementById('qArr').value, b = document.getElementById('qDep').value;
+  if (!a || !b || b <= a){ alert('Elige fechas válidas.'); return; }
+  openRes('');
+  document.getElementById('rArr').value = a;
+  document.getElementById('rDep').value = b;
+  var r = ROOMS[+document.getElementById('rSel').value - 1];
+  var n = Math.round((new Date(b) - new Date(a)) / 864e5);
+  document.getElementById('rTot').textContent = _fmt(r.pr * n);
+}
+
+var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.16});
+renderRooms();
+renderGal();
+document.querySelectorAll('.reveal, .rm, .am, figure').forEach(function(el){ io.observe(el); });
 </script>
+<style>
+.jm-mark{position:fixed;left:16px;bottom:16px;z-index:1200;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 9px;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid rgba(11,18,32,.12);box-shadow:0 6px 18px -10px rgba(11,18,32,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#3c4a5f;font:600 11px Inter,system-ui,sans-serif;letter-spacing:.1px;cursor:default;user-select:none;opacity:.9;white-space:nowrap;text-decoration:none;}
+.jm-mark .jm-ic{width:20px;height:20px;border-radius:7px;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:grid;place-items:center;flex:none;}
+.jm-mark b{color:#111729;font-weight:700;}
+.jm-mark:hover{opacity:1;}
+</style>
+<a class="jm-mark" href="index.html" title="Diseñado y desarrollado por Jheremy Medina">
+  <span class="jm-ic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5.25 3.4 9.74 8 11 4.6-1.26 8-5.75 8-11V5l-8-3Z"/><path d="m8.5 12 2.2 2.2L15.5 9.5"/></svg></span>
+  <span>Hecho por <b>Jheremy Medina</b></span>
+</a>
 </body>
 </html>

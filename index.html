@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Jheremy Medina · Ingeniero Electrónico — IoT, IA y Datos</title>
-<meta name="description" content="Portafolio de Jheremy Alexander Medina Castro. Ingeniero electrónico: sistemas IoT con ESP32 y MQTT, Python e IA, dashboards en Node-RED y páginas web a la medida.">
+<title>Jheremy Medina · Ingeniero Electrónico — IoT, IA, Datos y Ciberseguridad</title>
+<meta name="description" content="Portafolio de Jheremy Alexander Medina Castro. Ingeniero electrónico especialista en seguridad informática: sistemas IoT con ESP32 y MQTT, Python e IA, dashboards en Node-RED y desarrollo web con seguridad por diseño.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -110,6 +110,15 @@
   .svc h3{margin:0 0 9px;font-size:16.5px;}
   .svc p{margin:0 0 14px;color:var(--mut);font-size:13.5px;line-height:1.65;}
   .svc .t{font-size:12px;color:var(--acc);font-weight:700;}
+  .svc.sec{grid-column:1/-1;display:flex;align-items:center;gap:22px;background:
+    radial-gradient(520px 320px at 0% 100%,rgba(37,99,235,.22),transparent 55%),
+    radial-gradient(520px 320px at 100% 0%,rgba(124,58,237,.20),transparent 55%),
+    var(--ink);color:#fff;border-color:rgba(255,255,255,.08);padding:28px 30px;}
+  .svc.sec .ic{flex:none;width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.1);color:#7db2ff;margin:0;}
+  .svc.sec h3{margin:0 0 6px;font-size:18px;color:#fff;}
+  .svc.sec p{margin:0;color:#a9b6d0;font-size:13.5px;max-width:640px;}
+  .svc.sec .t{margin-left:auto;flex:none;color:#7db2ff;white-space:nowrap;}
+  @media(max-width:760px){.svc.sec{flex-direction:column;align-items:flex-start;gap:14px;} .svc.sec .t{margin-left:0;white-space:normal;}}
 
   /* process */
   .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
@@ -217,10 +226,10 @@
 
 <header class="hero">
   <div class="lx">
-    <div class="kicker reveal in"><i></i> Disponible para proyectos de IoT y software</div>
+    <div class="kicker reveal in"><i></i> Disponible para proyectos de IoT, software y ciberseguridad</div>
     <h1 class="disp reveal in">Jheremy Alexander<br>Medina Castro</h1>
-    <div class="role reveal in">Ingeniero Electrónico</div>
-    <p class="lead reveal in">Convierto sensores, datos y algoritmos en soluciones reales: sistemas de monitoreo con ESP32 y MQTT, inteligencia artificial en Python, dashboards en Node-RED y páginas web a la medida para tu negocio.</p>
+    <div class="role reveal in">Ingeniero Electrónico · Especialista en Seguridad Informática</div>
+    <p class="lead reveal in">Convierto sensores, datos y algoritmos en soluciones reales: sistemas de monitoreo con ESP32 y MQTT, inteligencia artificial en Python, dashboards en Node-RED y páginas web a la medida. Todo lo que construyo nace con seguridad por diseño: cifrado, control de accesos y datos protegidos desde la primera línea de código.</p>
     <div class="hctas reveal in">
       <a class="btn white" href="#contacto">Solicitar una cotización</a>
       <a class="btn ghost-w" href="#portafolio">Ver portafolio</a>
@@ -250,9 +259,10 @@
     </div>
     <div class="body reveal">
       <div class="eyb">Sobre mí</div>
-      <h3>Electrónica, datos e inteligencia: mis tres engranajes.</h3>
-      <p>Soy ingeniero electrónico enfocado en unir el mundo físico con la información. Diseño sistemas donde los sensores hablan con el software: lecturas que viajan por MQTT, se procesan en Python, se almacenan en bases de datos SQL y se visualizan en dashboards limpios y en tiempo real.</p>
-      <p>Trabajo de principio a fin: entiendo la necesidad, propongo la arquitectura, desarrollo e integro los componentes y entrego documentado y soportado. Mis entregables son claros, ordenados y pensados para crecer contigo: si tu negocio necesita datos, yo hago que cuenten.</p>
+      <h3>Electrónica, datos e inteligencia: mis tres engranajes. La seguridad: mi sello.</h3>
+      <p>Soy ingeniero electrónico especialista en seguridad informática, enfocado en unir el mundo físico con la información sin abrir huecos de seguridad. Diseño sistemas donde los sensores hablan con el software: lecturas que viajan por MQTT, se procesan en Python, se almacenan en bases de datos SQL y se visualizan en dashboards limpios y en tiempo real.</p>
+      <p>Cada solución la construyo con seguridad por diseño y no como una capa final: cifrado de extremo a extremo, autenticación en los dispositivos, control de accesos en las interfaces, credenciales protegidas y buenas prácticas de hardening en el firmware, la red y la base de datos. Porque un sistema que mide tu aire, tu inventario o tus clientes no puede tener puertas abiertas.</p>
+      <p>Trabajo de principio a fin: entiendo la necesidad, propongo la arquitectura, desarrollo e integro los componentes y entrego documentado y soportado. Mis entregables son claros, ordenados y pensados para crecer contigo: si tu negocio necesita datos, yo hago que cuenten, y que estén seguros.</p>
       <div class="pills">
         <span class="pill">ESP32 · Arduino</span>
         <span class="pill">MQTT · Mosquitto</span>
@@ -260,6 +270,8 @@
         <span class="pill">Python · Inteligencia Artificial</span>
         <span class="pill">SQL · SQLite · MySQL</span>
         <span class="pill">HTML · CSS · JavaScript</span>
+        <span class="pill">Ciberseguridad · Seguridad informática</span>
+        <span class="pill">Hardening IoT · Cifrado TLS</span>
         <span class="pill">Diseño web responsive</span>
         <span class="pill">Edición de video · DaVinci Resolve</span>
       </div>
@@ -273,7 +285,7 @@
       <div class="eyb">Servicios</div>
       <h2 class="sec-t">Qué puedo hacer por tu proyecto</h2>
     </div>
-    <p class="sec-lead">Soluciones técnicas de principio a fin. Precios justos, entregas ordenadas y soporte después de la entrega.</p>
+    <p class="sec-lead">Soluciones técnicas de principio a fin, todas construidas bajo criterios de seguridad informática. Precios justos, entregas ordenadas y soporte después de la entrega.</p>
   </div>
   <div class="grid4">
     <div class="svc reveal">
@@ -300,6 +312,12 @@
       <p>Diseño de esquemas, consultas optimizadas, limpieza y reportes automáticos en SQL (SQLite, MySQL).</p>
       <div class="t">SQL · Modelado · Reportes</div>
     </div>
+    <div class="svc sec reveal" style="transition-delay:.2s">
+      <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2 4 5v6c0 5.25 3.4 9.74 8 11 4.6-1.26 8-5.75 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <h3>Especialista en seguridad informática</h3>
+      <p>No es un complemento: es la base de todo lo que entrego. Cifrado TLS en las comunicaciones, autenticación y control de accesos en las interfaces, credenciales protegidas, actualización segura y buenas prácticas de hardening en el firmware, la red y la base de datos. Si tu sistema habla con internet, lo blindo desde la arquitectura.</p>
+      <div class="t">Ciberseguridad · Hardening · Cifrado · Auditoría</div>
+    </div>
   </div>
 </section>
 
@@ -314,7 +332,7 @@
   <div class="steps">
     <div class="step reveal"><div class="num">1</div><h3>Reunión y diagnóstico</h3><p>Escucho tu necesidad y reviso los datos o procesos que ya tienes. Definimos alcance, tiempos y presupuesto transparente.</p></div>
     <div class="step reveal" style="transition-delay:.06s"><div class="num">2</div><h3>Propuesta y diseño</h3><p>Te presento la arquitectura: sensores, flujos, base de datos y pantallas. Ajustamos juntos antes de construir.</p></div>
-    <div class="step reveal" style="transition-delay:.12s"><div class="num">3</div><h3>Desarrollo e integración</h3><p>Construyo, pruebo en tu entorno real y dejo todo documentado: desde el firmware hasta la interfaz final.</p></div>
+    <div class="step reveal" style="transition-delay:.12s"><div class="num">3</div><h3>Desarrollo, seguridad e integración</h3><p>Construyo aplicando seguridad por diseño: cifrado, autenticación y validación de entradas. Pruebo en tu entorno real y dejo todo documentado, desde el firmware hasta la interfaz final.</p></div>
     <div class="step reveal" style="transition-delay:.18s"><div class="num">4</div><h3>Entrega y soporte</h3><p>Recibes tu sistema funcionando, con guía de uso y acuerdos de soporte. Sigo disponible para mejoras.</p></div>
   </div>
 </section>
@@ -414,7 +432,7 @@
       <div class="eyb">Proyecto destacado</div>
       <h2 class="sec-t">Monitoreo inalámbrico de calidad de aire</h2>
     </div>
-    <p class="sec-lead">Un sistema real: sensores en físico trabajando en red, con datos que se ven en tiempo real.</p>
+    <p class="sec-lead">Un sistema real: sensores en físico trabajando en red, con datos que se ven en tiempo real y comunicaciones protegidas.</p>
   </div>
   <div class="feat reveal">
     <h3 class="h3">Arquitectura del sistema</h3>
@@ -424,6 +442,7 @@
       <div class="cell"><b>Umbrales configurables</b><p>Cada sensor tiene sus propios niveles por variable, con respaldo a valores por defecto desde el panel.</p></div>
       <div class="cell"><b>Mapa del lugar</b><p>Planos interactivos donde cada habitación o equipo muestra su estado visualmente y abre su gráfica.</p></div>
       <div class="cell"><b>Historial y exportación</b><p>Consultas por sala, variable y periodo, con descarga en CSV para reportes y análisis.</p></div>
+      <div class="cell"><b>Seguridad por diseño</b><p>Cifrado TLS en el transporte, credenciales para cada dispositivo en el broker, control de roles en el panel y validación de toda entrada que llega al servidor.</p></div>
     </div>
     <div class="btns">
       <a class="btn solid" href="#contacto">Quiero uno igual para mi negocio</a>
@@ -445,6 +464,7 @@
       <div class="bars">
         <div class="br"><div class="top"><span>Node-RED y flujos MQTT</span><b>95%</b></div><div class="bar"><div class="fill" data-w="95"></div></div></div>
         <div class="br"><div class="top"><span>Electrónica y ESP32</span><b>92%</b></div><div class="bar"><div class="fill" data-w="92"></div></div></div>
+        <div class="br"><div class="top"><span>Ciberseguridad y hardening</span><b>90%</b></div><div class="bar"><div class="fill" data-w="90"></div></div></div>
         <div class="br"><div class="top"><span>SQL y bases de datos</span><b>88%</b></div><div class="bar"><div class="fill" data-w="88"></div></div></div>
         <div class="br"><div class="top"><span>Python e Inteligencia Artificial</span><b>85%</b></div><div class="bar"><div class="fill" data-w="85"></div></div></div>
         <div class="br"><div class="top"><span>HTML, CSS y JavaScript</span><b>90%</b></div><div class="bar"><div class="fill" data-w="90"></div></div></div>
@@ -469,6 +489,10 @@
         <span class="pill">HTML5</span>
         <span class="pill">CSS3</span>
         <span class="pill">JavaScript</span>
+        <span class="pill">Cifrado TLS / SSL</span>
+        <span class="pill">Autenticación y roles</span>
+        <span class="pill">Validación de entradas</span>
+        <span class="pill">Hardening</span>
         <span class="pill">Responsive Design</span>
         <span class="pill">Git</span>
         <span class="pill">DaVinci Resolve</span>
@@ -489,6 +513,7 @@
     <div class="fq reveal"><button>¿Trabajas solo con empresas o también con personas y negocios pequeños?<span>+</span></button><div class="a"><p>Con ambos. Desde un consultorio que quiere medir su aire, un restaurante que digitaliza su carta, hasta proyectos industriales o universitarios. El alcance se ajusta a tu presupuesto.</p></div></div>
     <div class="fq reveal"><button>¿Puedo ver el avance o pruebas antes de pagar todo?<span>+</span></button><div class="a"><p>Sí. Trabajo con métodos de pago por etapas: recibes avances funcionales y pruebas reales durante el desarrollo. Nada se entrega "a ciegas".</p></div></div>
     <div class="fq reveal"><button>¿Me explicas cómo funciona lo que me entregas?<span>+</span></button><div class="a"><p>Por supuesto. Cada entrega incluye una guía en español, y te explico por video o llamada cómo usar y mantener tu sistema. El soporte posterior también está disponible.</p></div></div>
+    <div class="fq reveal"><button>¿El sistema protege los datos de mi negocio y de mis clientes?<span>+</span></button><div class="a"><p>Sí, y es parte del valor que entrego como especialista en seguridad informática. Cada sistema se construye con cifrado en las comunicaciones, autenticación de usuarios y dispositivos, control de roles y validación de datos. No dejo "puertas abiertas" en el firmware, la red o la web: la seguridad se diseña desde la arquitectura.</p></div></div>
     <div class="fq reveal"><button>¿Qué pasa si mi proyecto necesita cambios después?<span>+</span></button><div class="a"><p>Lo normal: los sistemas evolucionan. Los cambios se cotizan por alcance y se implementan sin rehacer lo que ya funciona. Tu proyecto queda escalable.</p></div></div>
   </div>
 </section>
@@ -498,7 +523,7 @@
     <div class="z">
       <div class="eyb" style="color:#8ab6ff">Contacto</div>
       <h2>Hablemos de tu proyecto</h2>
-      <p>Cuéntame qué necesitas medir, automatizar o digitalizar. Te respondo el mismo día con una propuesta clara, honesta y sin compromiso.</p>
+      <p>Cuéntame qué necesitas medir, automatizar o digitalizar, y lo construyo con seguridad por diseño. Te respondo el mismo día con una propuesta clara, honesta y sin compromiso.</p>
       <div class="cbtns">
         <a class="btn wap" href="https://wa.me/573043247352?text=Hola%20Jheremy%2C%20vi%20tu%20portafolio%20y%20quiero%20cotizar%20un%20proyecto">WhatsApp +57 304 324 7352</a>
         <a class="btn mail" href="mailto:jheremyk123@gmail.com">jheremyk123@gmail.com</a>
@@ -513,7 +538,7 @@
 </section>
 
 <div class="foot">
-  <div>© <span id="yr"></span> <b>Jheremy Alexander Medina Castro</b> &middot; Ingeniero Electrónico &middot; IoT, datos e inteligencia artificial.</div>
+  <div>© <span id="yr"></span> <b>Jheremy Alexander Medina Castro</b> &middot; Ingeniero Electrónico &middot; Especialista en Seguridad Informática &middot; IoT, datos e inteligencia artificial.</div>
   <div style="margin-top:6px;font-size:12px;color:#8b96ab">Colombia &middot; <a href="https://wa.me/573043247352">WhatsApp</a> &middot; <a href="mailto:jheremyk123@gmail.com">Correo</a></div>
 </div>
 
@@ -526,7 +551,7 @@ function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
 addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
 /* marquee content */
-var techs = ['ESP32','Arduino','MQTT','Mosquitto','Node-RED','Python','Inteligencia Artificial','OpenCV','SQL','SQLite','MySQL','HTML','CSS','JavaScript','Raspberry Pi','Dashboards','IoT','DaVinci Resolve','Git'];
+var techs = ['ESP32','Arduino','MQTT','Mosquitto','Node-RED','Python','Inteligencia Artificial','OpenCV','SQL','SQLite','MySQL','HTML','CSS','JavaScript','Raspberry Pi','Dashboards','IoT','Ciberseguridad','Hardening','Cifrado TLS','Autenticación','Control de accesos','DaVinci Resolve','Git'];
 function buildSet(){
   return '<div class="set">' + techs.map(function(t){ return '<span>'+t+'</span>'; }).join('') + '</div>';
 }
@@ -566,5 +591,15 @@ document.querySelectorAll('.fq button').forEach(function(b){
   };
 });
 </script>
+<style>
+.jm-mark{position:fixed;left:16px;bottom:16px;z-index:1200;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 9px;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid rgba(11,18,32,.12);box-shadow:0 6px 18px -10px rgba(11,18,32,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#3c4a5f;font:600 11px Inter,system-ui,sans-serif;letter-spacing:.1px;cursor:default;user-select:none;opacity:.9;white-space:nowrap;text-decoration:none;}
+.jm-mark .jm-ic{width:20px;height:20px;border-radius:7px;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:grid;place-items:center;flex:none;}
+.jm-mark b{color:#111729;font-weight:700;}
+.jm-mark:hover{opacity:1;}
+</style>
+<a class="jm-mark" href="#contacto" title="Diseñado y desarrollado por Jheremy Medina">
+  <span class="jm-ic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5.25 3.4 9.74 8 11 4.6-1.26 8-5.75 8-11V5l-8-3Z"/><path d="m8.5 12 2.2 2.2L15.5 9.5"/></svg></span>
+  <span>Hecho por <b>Jheremy Medina</b></span>
+</a>
 </body>
 </html>
