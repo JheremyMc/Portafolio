@@ -18,7 +18,7 @@ Todos los sitios son **autocontenidos** (HTML + CSS + JS en un solo archivo, sin
 Abre `index.html` en cualquier navegador, o visita la versión publicada en GitHub Pages:
 
 ```
-https://TU-USUARIO.github.io/portafolio/
+https://jheremymc.github.io/Portafolio/
 ```
 
 ## Demostración en vivo (Node-RED)
