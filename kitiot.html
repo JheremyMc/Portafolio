@@ -336,14 +336,14 @@ main{max-width:1180px;margin:0 auto;padding:20px 18px 90px;}
   var VARS=['co2_ppm','sht_temp','sht_hum','ch2o_ppb','ds18_temp'];
   var DEF={co2_ppm:{amarillo:700,rojo:1400},sht_temp:{amarillo:26,rojo:32},ch2o_ppb:{amarillo:30,rojo:120},ds18_temp:{amarillo:26,rojo:32},sht_hum:{amarillo:60,rojo:80,low_amarillo:40,low_rojo:25}};
   var SALAS=[
-    {z:'urg_01',n:'Urgencias',px:6,py:8,w:24,h:34,sens:['co2_ppm','sht_temp','sht_hum']},
+    {z:'pab_01',n:'Pabellón',px:78,py:8,w:16,h:34,sens:['co2_ppm','sht_temp','sht_hum']},
     {z:'qui_01',n:'Quirófano 1',px:34,py:8,w:22,h:34,sens:['co2_ppm','sht_temp','sht_hum','ch2o_ppb']},
-    {z:'uci_01',n:'UCI',px:60,py:8,w:20,h:34,sens:['co2_ppm','sht_temp','sht_hum','ds18_temp']},
+    {z:'recep_01',n:'Recepción',px:78,py:50,w:16,h:34,sens:['sht_temp','sht_hum']},
     {z:'sala_01',n:'Sala 1',px:6,py:50,w:20,h:34,sens:['co2_ppm','sht_temp','sht_hum']},
     {z:'sala_02',n:'Sala 2',px:30,py:50,w:20,h:34,sens:['co2_ppm','sht_temp','sht_hum','ch2o_ppb']},
     {z:'sala_03',n:'Sala 3',px:54,py:50,w:20,h:34,sens:['co2_ppm','sht_temp','sht_hum']},
-    {z:'pab_01',n:'Pabellón',px:78,py:8,w:16,h:34,sens:['co2_ppm','sht_temp','sht_hum']},
-    {z:'recep_01',n:'Recepción',px:78,py:50,w:16,h:34,sens:['sht_temp','sht_hum']}
+    {z:'uci_01',n:'UCI',px:60,py:8,w:20,h:34,sens:['co2_ppm','sht_temp','sht_hum','ds18_temp']},
+    {z:'urg_01',n:'Urgencias',px:6,py:8,w:24,h:34,sens:['co2_ppm','sht_temp','sht_hum']}
   ];
   var DEV_BASE={co2_ppm:[430,760],sht_temp:[22.5,27],sht_hum:[34,62],ch2o_ppb:[5,32],ds18_temp:[22.5,27]};
   var DEVS=[],HIST={},LIVE={},SPK={},ACT={sala:null,var:null};
